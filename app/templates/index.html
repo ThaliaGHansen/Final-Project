@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<canvas></canvas>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <title></title>
+</head>
+
+<body>
+  <!-- PUT EVERYTHING HERE -->
+
+  <!-- This styling area is for just this page! -->
+  <style>
+
+body{
+  margin: 0px;
+  padding: 0px;
+}
+canvas{
+  display: grid;
+  grid-template-columns: 1fr;
+  background-color: #000; 
+}
+    
+
+    .jumbotron {
+      background-color: black;
+      color: white;
+      margin-bottom: 0px;
+      /* color is for FONT */
+    }
+  </style>
+
+  <div class="container">
+
+    <!-- JUMBOTRON -->
+    <!-- <div class="row"> -->
+      <div class="jumbotron text-center">
+
+        <h1>Taste the Rainbow</h1>
+        <hr>
+        <!-- Random Fact Area -->
+        <button type="button" class="btn btn-primary" onClick="funFact()">Random Fact</button>
+        <p id="random-fact">PLACEHOLDER TEXT</p>
+      </div>
+
+      <!-- NAV BAR -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          <nav class="navbar navbar-light" style="background-color: black;">
+  <!-- Navbar content -->
+</nav>
+        
+            <li class="nav-item">
+              <!-- <a class="nav-link" href="./Worldmap.html">World Map</a> -->
+              <a class="nav-link" href="/worldmap">World Map</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://github.com/cmjordan333/Project-2">Repo</a>
+            </li>
+            <!-- ADD MORE NAV LINKS HERE -->
+          </ul>
+        </div>
+      </nav>
+
+      <p class="text center">
+      <div class="p-3 mb-2 bg-light text-dark">   insert a graph here .</div>
+
+</p>
+      <!-- END NAV BAR -->
+
+
+    <!-- </div> -->
+    <!-- END JUMBOTRON -->
+
+
+  </div>
+</div>
+
+  <div class="col-md-5">
+    <div id="pie"></div>
+  </div>
+  <div class="col-md-5">
+    <div id="gauge"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div id="bubble"></div>
+    </div>
+  
+
+    <!-- /.navbar-collapse -->
+  </div>
+
+  <!-- Creates the Overall Grid -->
+  <div class="container">
+
+    <div class="row">
+
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+
+  <!-- D3 and Plotly -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+
+  <!-- D3 -->
+  <!-- MomentJS -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+
+  <!-- polyfill.io is library for using newer JavaScript features in older browers (such as Object.assign) -->
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+
+  <!-- API Key -->
+  <script type="text/javascript" src="../static/js/config.js"></script>
+
+  <!-- Our JavaScript -->
+  <!-- CUSTOM JS -->
+  <script type="text/javascript" src="../static/js/data.js"></script>
+  
+</body>
+  <div id="footer">
+    <p>Robben, Chris, and Thalia &copy;2019</p>
+  </div>
+</html>
