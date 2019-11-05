@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<canvas></canvas>
+
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,23 +13,12 @@
 
   <title></title>
 </head>
-
-<body>
-  <!-- PUT EVERYTHING HERE -->
-
-  <!-- This styling area is for just this page! -->
-  <style>
-
-body{
-  margin: 0px;
-  padding: 0px;
-}
-canvas{
-  display: grid;
-  grid-template-columns: 1fr;
-  background-color: #000; 
-}
-    
+<style>
+    body {
+      background-image: url("../static/images/Skittles.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
 
     .jumbotron {
       background-color: black;
@@ -38,6 +27,12 @@ canvas{
       /* color is for FONT */
     }
   </style>
+
+<body>
+  <!-- PUT EVERYTHING HERE -->
+
+  <!-- This styling area is for just this page! -->
+<canvas></canvas>
 
   <div class="container">
 
@@ -71,6 +66,21 @@ canvas{
             </li>
             <!-- ADD MORE NAV LINKS HERE -->
           </ul>
+         
+          <div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+  <div id="myDropdown" class="dropdown-content">
+    <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+    <a href="#about">Graph1</a>
+    <a href="#base">Graph2</a>
+    <a href="#blog">Graph3</a>
+    <a href="#contact">Graph4</a>
+    <a href="#custom">Graph5</a>
+    <a href="#support">Graph6</a>
+    <a href="#tools">Graph7</a>
+  </div>
+   
+</div>
         </div>
       </nav>
 
@@ -99,7 +109,7 @@ canvas{
     <div class="col-md-12">
       <div id="bubble"></div>
     </div>
-  
+ 
 
     <!-- /.navbar-collapse -->
   </div>
@@ -113,7 +123,7 @@ canvas{
     </div>
 
   </div>
-
+</canvas>
 
 
   <!-- Optional JavaScript -->
@@ -139,7 +149,7 @@ canvas{
   <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 
   <!-- API Key -->
-  <script type="text/javascript" src="../static/js/config.js"></script>
+  <script type="text/javascript" src="../static/config.js"></script>
 
   <!-- Our JavaScript -->
   <!-- CUSTOM JS -->
