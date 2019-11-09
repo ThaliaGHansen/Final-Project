@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <title></title>
+</head>
+<style>
+  body {
+    background-image: url("../static/images/Skittles.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  canvas {
+    position: absolute;
+  }
+
+  .jumbotron {
+    background-color: black;
+    color: white;
+    margin-bottom: 0px;
+    /* color is for FONT */
+  }
+</style>
+
+<body>
+  <!-- PUT EVERYTHING HERE -->
+
+  <!-- This styling area is for just this page! -->
+  <canvas id="skittles-canvas"></canvas>
+
+  <div class="container">
+
+    <!-- JUMBOTRON -->
+    <!-- <div class="row"> -->
+    <div class="jumbotron text-center">
+
+      <h1>Stacked Graph Page</h1>
+      <hr>
+      <!-- Random Fact Area -->
+    
+
+    <!-- NAV BAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Graph Visuals
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="/">Home</a>
+              <a class="dropdown-item" href="/obsgraph">Observed vs. Simulated</a>
+              <a class="dropdown-item" href="/stacked">Defects</a>
+              <a class="dropdown-item" href="/fun">Conclusion</a>
+       
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="text center">
+      <div class="p-3 mb-2 bg-light text-dark"> screen shots of code
+</div>
+
+      <!-- DIV for stacked overall chart -->
+      <div id="stacked-overall"></div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>Robben, Chris, and Thalia &copy;2019</p>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+
+  <!-- D3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+
+  <!-- PLOTLY -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <!-- GRAPH CODE -->
+  <script>
+    // Read the CSV and extract out the values
+    d3.csv("../static/data/skittles.csv")
+      .then(function (response) {
+        console.log(response);
+
+        // create our variables
+        p_total = 0
+        g_total = 0
+        r_total = 0
+        y_total = 0
+        o_total = 0
+
+        dp_total = 0
+        dg_total = 0
+        dr_total = 0
+        dy_total = 0
+        do_total = 0
+
+        // loop through each row and grab all the count of all colors (normal and defected)
+        for (let index = 0; index < response.length; index++) {
+          let element = response[index];
+
+          // add to each one of the variables
+          p_total += parseInt(element['purple'])
+          g_total += parseInt(element['green'])
+          r_total += parseInt(element['red'])
+          y_total += parseInt(element['yellow'])
+          o_total += parseInt(element['orange'])
+
+          dp_total += parseInt(element['d_purple'])
+          dg_total += parseInt(element['d_green'])
+          dr_total += parseInt(element['d_red'])
+          dy_total += parseInt(element['d_yellow'])
+          do_total += parseInt(element['d_orange'])
+        }
+
+        var colors = ["Purple", "Green", "Red", "Yellow", "Orange"];
+
+        var normalCount = [p_total, g_total, r_total, y_total, o_total];
+        var defectCount = [dp_total, dg_total, dr_total, dy_total, do_total];
+
+        // Regular skittles bar data
+        var trace1 = {
+          x: colors,
+          y: normalCount,
+          type: 'bar',
+          text: normalCount.map(String),
+          textposition: 'auto',
+          hoverinfo: 'none',
+          opacity: 0.5,
+          marker: {
+            color: 'rgb(158,202,225)',
+            line: {
+              color: 'rgb(8,48,107)',
+              width: 1.5
+            }
+          }
+        };
+
+        // Defect skittles bar data
+        var trace2 = {
+          x: colors,
+          y: defectCount,
+          type: 'bar',
+          text: defectCount.map(String),
+          textposition: 'auto',
+          hoverinfo: 'none',
+          marker: {
+            color: 'rgba(purple, green,red,yellow,orange),.5)',
+            line: {
+              color: 'rgb(purple, green,red,yellow,orange)',
+              width: 1.5
+            }
+          }
+        };
+
+        var data = [trace1, trace2];
+
+        var layout = {
+          barmode: 'stack',
+          title: 'Distribution of Regular and Defects by Skittle Color'
+        };
+
+        Plotly.newPlot('stacked-overall', data, layout);
+
+      })
+  </script>
+  <div>
+<script>
+// Read the CSV and extract out the values
+    d3.csv("../static/data/skittles.csv")
+      .then(function (response) {
+        console.log(response);
+
+        // create our variables
+        mean_p  = 0
+        mean_g  = 0
+        mean_r  = 0
+        mean_y  = 0
+        mean_o  = 0
+
+        mean_dp  = 0
+        mean_dg  = 0
+        mean_dr  = 0
+        mean_dy  = 0
+        mean_do  = 0
+
+        // loop through each row and grab all the count of all colors (normal and defected)
+        for (let index = 0; index < response.length; index++) {
+          let element = response[index];
+
+          // add to each one of the variables
+          d3.mean('purple')
+          mean_p +=  d3.mean('purple')
+          mean_g +=  d3.mean('green')
+          mean_r +=  d3.mean('red')
+          mean_y +=  d3.mean('yellow')
+          mean_o +=  d3.mean('orange')
+
+          mean_dp += d3.mean('d_purple')
+          mean_dg += d3.mean('d_green')
+          mean_dr += d3.mean('d_red')
+          mean_dy += d3.mean('d_yellow')
+          mean_do += d3.mean('d_orange')
+        }
+
+        var colors = ["Purple", "Green", "Red", "Yellow", "Orange"];
+
+        var normalCount = [mean_p, mean_g, mean_r, mean_y, mean_o];
+        var defectCount = [mean_dp, mean_dg, mean_dr, mean_dy, mean_do];
+
+        // Regular skittles bar data
+        var trace3 = {
+          x: colors,
+          y: normalCount,
+          type: 'bar',
+          text: normalCount.map(String),
+          textposition: 'auto',
+          hoverinfo: 'none',
+          opacity: 0.5,
+          marker: {
+            color: 'rgb(purple, green,red,yellow,orange)',
+            line: {
+              color: 'rgb(purple, green,red,yellow,orange)',
+              width: 1.5
+            }
+          }
+        };
+
+        // Defect skittles bar data
+        var trace4 = {
+          x: colors,
+          y: defectCount,
+          type: 'bar',
+          text: defectCount.map(String),
+          textposition: 'auto',
+          hoverinfo: 'none',
+          marker: {
+            color: 'rgba(58,200,225,.5)',
+            line: {
+              color: 'rgb(8,48,107)',
+              width: 1.5
+            }
+          }
+        };
+
+        var data = [trace3, trace4];
+
+        var layout = {
+          barmode: 'stack',
+          title: 'Average of Regular and Defects by Skittle Color'
+        };
+
+        Plotly.newPlot('stacked-overall', data, layout);
+
+      })
+
+
+</script>
+
+ </div>
+
+</body>
+
+</html>
