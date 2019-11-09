@@ -47,40 +47,46 @@
       <h1>Stacked Graph Page</h1>
       <hr>
       <!-- Random Fact Area -->
-    
 
-    <!-- NAV BAR -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Graph Visuals
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="/">Home</a>
+
+      <!-- NAV BAR -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Graph Visuals
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/">Home</a>
               <a class="dropdown-item" href="/obsgraph">Observed vs. Simulated</a>
-              <a class="dropdown-item" href="/stacked">Defects</a>
+              <a class="dropdown-item" href="/stacked">Normal vs. Defects</a>
               <a class="dropdown-item" href="/fun">Conclusion</a>
-       
-            </div>
-          </li>
-        </ul>
+              <a class="dropdown-item" href="/skittles_mla2">MLcode</a>
+              <a class="dropdown-item" href="/skittles-test2.html">Obscode</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="text center">
+        <div class="p-3 mb-2 bg-light text-dark"> screen shots of code
+        </div>
+
+        <!-- DIV for stacked overall chart -->
+        <div id="stacked-overall"></div>
+
+        <!-- DIV for stacked overall MEAN chart -->
+        <div id="stacked-overall-mean"></div>
       </div>
-    </nav>
-
-    <div class="text center">
-      <div class="p-3 mb-2 bg-light text-dark"> screen shots of code
-</div>
-
-      <!-- DIV for stacked overall chart -->
-      <div id="stacked-overall"></div>
     </div>
+
   </div>
 
   <div id="footer">
@@ -149,7 +155,7 @@
         var defectCount = [dp_total, dg_total, dr_total, dy_total, do_total];
 
         // Regular skittles bar data
-        var trace1 = {
+        var Normal = {
           x: colors,
           y: normalCount,
           type: 'bar',
@@ -158,16 +164,16 @@
           hoverinfo: 'none',
           opacity: 0.5,
           marker: {
-            color: 'rgb(158,202,225)',
+            color: ['rgb(102, 0, 102)', 'rgb(0, 204, 0)', 'rgb(204, 0, 0)', 'rgb(255, 255, 0)', 'rgb(255, 102, 0)'],
             line: {
-              color: 'rgb(8,48,107)',
+              color: 'rgb(102, 0, 102)',
               width: 1.5
             }
           }
         };
 
         // Defect skittles bar data
-        var trace2 = {
+        var Defective = {
           x: colors,
           y: defectCount,
           type: 'bar',
@@ -175,7 +181,7 @@
           textposition: 'auto',
           hoverinfo: 'none',
           marker: {
-            color: 'rgba(purple, green,red,yellow,orange),.5)',
+            color: ['rgb(102, 0, 102)', 'rgb(0, 204, 0)', 'rgb(204, 0, 0)', 'rgb(255, 255, 0)', 'rgb(255, 102, 0)'],
             line: {
               color: 'rgb(purple, green,red,yellow,orange)',
               width: 1.5
@@ -183,7 +189,7 @@
           }
         };
 
-        var data = [trace1, trace2];
+        var data = [Normal, Defective];
 
         var layout = {
           barmode: 'stack',
@@ -192,102 +198,75 @@
 
         Plotly.newPlot('stacked-overall', data, layout);
 
-      })
-  </script>
-  <div>
-<script>
-// Read the CSV and extract out the values
-    d3.csv("../static/data/skittles.csv")
-      .then(function (response) {
-        console.log(response);
+        // *************************************************************************************** //
+        // MEAN/AVERAGE GRAPH SECTION
 
-        // create our variables
-        mean_p  = 0
-        mean_g  = 0
-        mean_r  = 0
-        mean_y  = 0
-        mean_o  = 0
+        // calculate total normal
+        // calculate total defects
+        normal_total = p_total + g_total + r_total + y_total + o_total;
+        defect_total = dp_total + dg_total + dr_total + dy_total + do_total;
 
-        mean_dp  = 0
-        mean_dg  = 0
-        mean_dr  = 0
-        mean_dy  = 0
-        mean_do  = 0
+        // calculate all means for norml and defects
+        p_mean = p_total / 100;
+        g_mean = g_total / 100;
+        r_mean = r_total / 100;
+        y_mean = y_total / 100;
+        o_mean = o_total / 100;
 
-        // loop through each row and grab all the count of all colors (normal and defected)
-        for (let index = 0; index < response.length; index++) {
-          let element = response[index];
+        dp_mean = dp_total / 100;
+        dg_mean = dg_total / 100;
+        dr_mean = dr_total / 100;
+        dy_mean = dy_total / 100;
+        do_mean = do_total / 100;
 
-          // add to each one of the variables
-          d3.mean('purple')
-          mean_p +=  d3.mean('purple')
-          mean_g +=  d3.mean('green')
-          mean_r +=  d3.mean('red')
-          mean_y +=  d3.mean('yellow')
-          mean_o +=  d3.mean('orange')
 
-          mean_dp += d3.mean('d_purple')
-          mean_dg += d3.mean('d_green')
-          mean_dr += d3.mean('d_red')
-          mean_dy += d3.mean('d_yellow')
-          mean_do += d3.mean('d_orange')
-        }
+        var normalMean = [p_mean, g_mean, r_mean, y_mean, o_mean];
+        var defectMean = [dp_mean, dg_mean, dr_mean, dy_mean, do_mean];
 
-        var colors = ["Purple", "Green", "Red", "Yellow", "Orange"];
-
-        var normalCount = [mean_p, mean_g, mean_r, mean_y, mean_o];
-        var defectCount = [mean_dp, mean_dg, mean_dr, mean_dy, mean_do];
-
-        // Regular skittles bar data
-        var trace3 = {
+        var trace1 = {
           x: colors,
-          y: normalCount,
-          type: 'bar',
-          text: normalCount.map(String),
-          textposition: 'auto',
-          hoverinfo: 'none',
-          opacity: 0.5,
+          y: normalMean,
+          mode: 'markers',
+          type: 'scatter',
+          name: 'Normal',
+          text: colors,
+          color: ['rgb(102, 0, 102)', 'rgb(0, 204, 0)', 'rgb(204, 0, 0)', 'rgb(255, 255, 0)', 'rgb(255, 102, 0)'],
           marker: {
-            color: 'rgb(purple, green,red,yellow,orange)',
-            line: {
-              color: 'rgb(purple, green,red,yellow,orange)',
-              width: 1.5
-            }
+            size: 12
           }
         };
 
-        // Defect skittles bar data
-        var trace4 = {
+        var trace2 = {
           x: colors,
-          y: defectCount,
-          type: 'bar',
-          text: defectCount.map(String),
-          textposition: 'auto',
-          hoverinfo: 'none',
+          y: defectMean,
+          mode: 'markers',
+          type: 'scatter',
+          name: 'Defects',
+          text: colors,
+          color: ['rgb(102, 0, 102)', 'rgb(0, 204, 0)', 'rgb(204, 0, 0)', 'rgb(255, 255, 0)', 'rgb(255, 102, 0)'],
           marker: {
-            color: 'rgba(58,200,225,.5)',
-            line: {
-              color: 'rgb(8,48,107)',
-              width: 1.5
-            }
+            size: 12
           }
         };
 
-        var data = [trace3, trace4];
+        var data = [trace1, trace2];
 
         var layout = {
-          barmode: 'stack',
+          // xaxis: {
+          //   range: [0.75, 5.25]
+          // },
+          // yaxis: {
+          //   range: [0, 8]
+          // },
           title: 'Average of Regular and Defects by Skittle Color'
         };
 
-        Plotly.newPlot('stacked-overall', data, layout);
+        Plotly.newPlot('stacked-overall-mean', data, layout, {
+          showSendToCloud: true
+        });
 
       })
-
-
-</script>
-
- </div>
+  </script>
 
 </body>
 

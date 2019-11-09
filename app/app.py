@@ -34,5 +34,16 @@ def fun():
     """Return the code page."""
     return render_template("fun.html")
 
+@app.route("/skittles_mla2")
+def code1():
+    """Return the code page."""
+    return render_template("skittles_mla2.html")
+
+@app.route("/skittles-test2")
+def code2():
+    """Return the code page."""
+    return render_template("skittles-test2.html")
+
+
 if __name__ == "__main__":
     app.run()
