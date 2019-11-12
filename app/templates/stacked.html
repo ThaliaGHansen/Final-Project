@@ -25,11 +25,13 @@
   }
 
   .jumbotron {
+    background-image: url("../static/images/skittles2.png");
     background-color: black;
     color: white;
     margin-bottom: 0px;
     /* color is for FONT */
   }
+  
 </style>
 
 <body>
@@ -44,12 +46,13 @@
     <!-- <div class="row"> -->
     <div class="jumbotron text-center">
 
-      <h1>Stacked Graph Page</h1>
+      <h1></h1>
       <hr>
       <!-- Random Fact Area -->
 
 
       <!-- NAV BAR -->
+
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
           aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,20 +66,19 @@
                 Graph Visuals
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="/">Home</a>
-              <a class="dropdown-item" href="/obsgraph">Observed vs. Simulated</a>
+              <a class="dropdown-item" href="/">Home</a>
               <a class="dropdown-item" href="/stacked">Normal vs. Defects</a>
-              <a class="dropdown-item" href="/fun">Conclusion</a>
               <a class="dropdown-item" href="/skittles_mla2">MLcode</a>
-              <a class="dropdown-item" href="/skittles-test2.html">Obscode</a>
+              <a class="dropdown-item" href="/skittles_obs">Obscode</a>
               </div>
+               
             </li>
           </ul>
         </div>
       </nav>
 
       <div class="text center">
-        <div class="p-3 mb-2 bg-light text-dark"> screen shots of code
+        <div class="p-3 mb-2 bg-light text-dark"> 
         </div>
 
         <!-- DIV for stacked overall chart -->
@@ -230,9 +232,10 @@
           type: 'scatter',
           name: 'Normal',
           text: colors,
-          color: ['rgb(102, 0, 102)', 'rgb(0, 204, 0)', 'rgb(204, 0, 0)', 'rgb(255, 255, 0)', 'rgb(255, 102, 0)'],
           marker: {
-            size: 12
+            size: 12,
+            color: ['rgb(102, 0, 102)', 'rgb(0, 204, 0)', 'rgb(204, 0, 0)', 'rgb(255, 255, 0)', 'rgb(255, 102, 0)'],
+          
           }
         };
 
@@ -243,9 +246,10 @@
           type: 'scatter',
           name: 'Defects',
           text: colors,
-          color: ['rgb(102, 0, 102)', 'rgb(0, 204, 0)', 'rgb(204, 0, 0)', 'rgb(255, 255, 0)', 'rgb(255, 102, 0)'],
           marker: {
-            size: 12
+            size: 12,
+            color: ['rgba(102, 0, 102, 0.2)', 'rgba(0, 204, 0, 0.2)', 'rgb(204, 0, 0)', 'rgb(255, 255, 0)', 'rgb(255, 102, 0)'],
+          
           }
         };
 

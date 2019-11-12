@@ -39,10 +39,10 @@ def code1():
     """Return the code page."""
     return render_template("skittles_mla2.html")
 
-@app.route("/skittles-test2")
+@app.route("/skittles_obs")
 def code2():
     """Return the code page."""
-    return render_template("skittles-test2.html")
+    return render_template("skittles_obs.html")
 
 
 if __name__ == "__main__":
