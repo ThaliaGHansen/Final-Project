@@ -68,7 +68,7 @@
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="/">Home</a>
               <a class="dropdown-item" href="/stacked">Normal vs. Defects</a>
-              <a class="dropdown-item" href="/skittles_mla2">MLcode</a>
+              <a class="dropdown-item" href="/skittles_mla">MLcode</a>
               <a class="dropdown-item" href="/skittles_obs">Obscode</a>
               </div>
                
@@ -225,7 +225,7 @@
         var normalMean = [p_mean, g_mean, r_mean, y_mean, o_mean];
         var defectMean = [dp_mean, dg_mean, dr_mean, dy_mean, do_mean];
 
-        var trace1 = {
+        var Normal_S = {
           x: colors,
           y: normalMean,
           mode: 'markers',
@@ -239,7 +239,7 @@
           }
         };
 
-        var trace2 = {
+        var Defective_S = {
           x: colors,
           y: defectMean,
           mode: 'markers',
@@ -248,12 +248,12 @@
           text: colors,
           marker: {
             size: 12,
-            color: ['rgba(102, 0, 102, 0.2)', 'rgba(0, 204, 0, 0.2)', 'rgb(204, 0, 0)', 'rgb(255, 255, 0)', 'rgb(255, 102, 0)'],
+            color: ['rgba(102, 0, 102, 0.2)', 'rgba(0, 204, 0, 0.2)', 'rgba(204, 0, 0,0.2)', 'rgba(255, 255, 0,0.2)', 'rgba(255, 102, 0,0.2)'],
           
           }
         };
 
-        var data = [trace1, trace2];
+        var data = [Normal_S, Defective_S];
 
         var layout = {
           // xaxis: {

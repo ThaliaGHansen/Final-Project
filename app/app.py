@@ -34,10 +34,10 @@ def fun():
     """Return the code page."""
     return render_template("fun.html")
 
-@app.route("/skittles_mla2")
+@app.route("/skittles_mla")
 def code1():
     """Return the code page."""
-    return render_template("skittles_mla2.html")
+    return render_template("skittles_mla.html")
 
 @app.route("/skittles_obs")
 def code2():
